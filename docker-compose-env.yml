@@ -2,7 +2,7 @@ version: "3"
 
 services:
   chirpstack-network-server:
-    image: chirpstack/chirpstack-network-server:3
+    image: techrick/chirpstack-network-server
     environment:
       - POSTGRESQL__DSN=postgres://chirpstack_ns:chirpstack_ns@postgresql/chirpstack_ns?sslmode=disable
       - REDIS__URL=redis://redis:6379
@@ -12,7 +12,7 @@ services:
       - GEOLOCATION_SERVER__SERVER=chirpstack-geolocation-server:8005
 
   chirpstack-application-server:
-    image: chirpstack/chirpstack-application-server:3
+    image: techrick/chirpstack-application-server
     ports:
       - 8080:8080
     environment:
@@ -23,14 +23,14 @@ services:
       - APPLICATION_SERVER__EXTERNAL_API__JWT_SECRET=verysecret
 
   chirpstack-gateway-bridge:
-    image: chirpstack/chirpstack-gateway-bridge:3
+    image: techrick/chirpstack-gateway-bridge
     ports:
       - 1700:1700/udp
     environment:
       - INTEGRATION__MQTT__AUTH__GENERIC__SERVERS=tcp://mosquitto:1883
 
   chirpstack-geolocation-server:
-    image: chirpstack/chirpstack-geolocation-server:3
+    image: techrick/chirpstack-geolocation-server
     environment:
       - GEO_SERVER__BACKEND__NAME=collos
 
